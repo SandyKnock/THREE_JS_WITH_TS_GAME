@@ -1,0 +1,75 @@
+# Max2Mtl Version 4.0 Mar 10th, 2001
+#
+newmtl SPAWN_HEAD
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  1.0 1.0 1.0
+d  1.0
+Ns  2.5
+illum 2
+#
+newmtl SPAWN_TORSO
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  1.0 1.0 1.0
+d  1.0
+Ns  2.5
+illum 2
+#
+newmtl BLACK_MATTE
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  1.0 1.0 1.0
+d  1.0
+Ns  2.4
+illum 2
+#
+newmtl SPAWN_ARMOR
+Ka  0.6 0.1 0.1
+Kd  0.6 0.1 0.1
+Ks  0.7 1.0 1.0
+d  1.0
+Ns  3.4
+illum 2
+#
+newmtl SPAWN_ARM
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  1.0 1.0 1.0
+d  1.0
+Ns  2.5
+illum 2
+#
+newmtl Default
+Ka  0.7 0.7 0.7
+Kd  0.7 0.7 0.7
+Ks  1.0 1.0 1.0
+d  1.0
+Ns  7.1
+illum 2
+#
+newmtl SPAWN_LEG
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  1.0 1.0 1.0
+d  1.0
+Ns  2.5
+illum 2
+#
+newmtl SPAWN_CAPE
+Ka  0.6 0.1 0.1
+Kd  0.6 0.1 0.1
+Ks  0.7 1.0 1.0
+d  1.0
+Ns  3.4
+illum 2
+#
+newmtl SPAWN_SKULL
+Ka  0.6 0.6 0.3
+Kd  0.6 0.6 0.3
+Ks  1.0 1.0 1.0
+d  1.0
+Ns  3.9
+illum 2
+#
+# EOF
