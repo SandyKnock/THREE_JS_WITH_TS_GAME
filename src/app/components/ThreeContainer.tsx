@@ -199,6 +199,7 @@ export default class ThreeContainer extends React.Component {
       inclination: 0.49,
       azimuth: 0.205
     };
+
     // GUI
     let gui = new dat.GUI();
     let controlPanel = gui.addFolder('Sky');
@@ -209,6 +210,7 @@ export default class ThreeContainer extends React.Component {
       () => this.updateSun(parameters, lightArr, water)
     );//0.45
     controlPanel.open();
+
     let uniforms = water.material.uniforms;
     controlPanel = gui.addFolder('Water');
     controlPanel.add(
@@ -282,6 +284,7 @@ export default class ThreeContainer extends React.Component {
       player.model.add(camera);
       scene.add(player.model);
       player.listenForPlayerMovement();
+      player.voiceForPlayerMovement();
     });
   }
 

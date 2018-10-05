@@ -6,6 +6,8 @@ import { MTLLoader, OBJLoader } from 'three-obj-mtl-loader';
 
 //@ts-ignore
 import annyang from 'annyang';
+import { IControllers, IPlayerControllers } from 'app/game/interfaces/IPlayerControllers';
+import VoiceRecognitionController from 'app/game/VoiceRecognitionController';
 
 
 (window as any).THREE = THREE;
@@ -17,14 +19,14 @@ interface IPlayer {
 }
 
 
-export class Player implements IPlayer {
+export class Player implements IPlayer, IPlayerControllers {
   model: Object3D;
   private playerVelocity = new THREE.Vector3();
   private PLAYER_SPEED: number = 100.0;
   private PLAYER_SPEED_ROTATION: number = 800.0;
   private ACCELERATION_OF_GRAVITY = 9.82;
 
-  private controls: any = {
+  controls: IControllers = {
     moveForward: false,
     moveBackward: false,
     moveLeft: false,
@@ -85,124 +87,12 @@ export class Player implements IPlayer {
     });
   }
 
+  voiceForPlayerMovement(){
+    let voice = new VoiceRecognitionController(this.controls);
+    voice.voiceRecognitionController();
+  }
+
   listenForPlayerMovement() {
-    // Listen for when a key is pressed
-    // If it's a specified key, mark the direction as true since moving
-    // if ('webkitSpeechRecognition' in window) {
-    //@ts-ignore
-    // let recognition = new window.webkitSpeechRecognition();
-    // recognition.continuous = true;
-    // recognition.interimResults = true;
-    // recognition.lang = 'ru-Ru';
-    // recognition.onresult = function(event: any) {
-    //   let result = event.results[event.resultIndex];
-    //   if (result.isFinal) {
-    //     alert('Вы сказали: ' + result[0].transcript);
-    //   } else {
-    //     console.log('Промежуточный результат: ', result[0].transcript);
-    //   }
-    // };
-
-// Начинаем слушать микрофон и распознавать голос
-//     recognition.start();
-//     // }
-
-
-    //@ts-ignore
-    let recognition = new window.webkitSpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = 'ru-Ru';
-
-    recognition.onresult = (event: any) => {
-      let result = event.results[event.resultIndex];
-      if (result.isFinal) {
-        console.log(result[0].transcript);
-        switch (result[0].transcript.replace(/\s/g, '')) {
-          case 'вверх':
-            if (this.controls.canJump === true) this.playerVelocity.y += 300;
-            this.controls.canJump = false;
-            break;
-          case 'налево':
-            this.controls.moveLeft = true;
-            this.controls.moveForward = false;
-            this.controls.moveBackward = false;
-            this.controls.moveRight = false;
-            break;
-          case 'направо':
-            this.controls.moveRight = true;
-            this.controls.moveForward = false;
-            this.controls.moveLeft = false;
-            this.controls.moveBackward = false;
-            break;
-          case 'вперёд':
-            this.controls.moveForward = true;
-            this.controls.moveLeft = false;
-            this.controls.moveBackward = false;
-            this.controls.moveRight = false;
-            break;
-          case 'вниз':
-            this.controls.moveBackward = true;
-            this.controls.moveLeft = false;
-            this.controls.moveBackward = false;
-            this.controls.moveRight = false;
-            break;
-          case 'стоп':
-            this.controls.moveForward = false;
-            this.controls.moveLeft = false;
-            this.controls.moveBackward = false;
-            this.controls.moveRight = false;
-            break;
-        }
-      }else{
-        console.log(result[0].transcript)
-      }
-    };
-    recognition.start();
-
-
-    // if (annyang) {
-    //
-    //   // Let's define a command.
-    //   let commands = {
-    //     'Jump': () => {
-    //       if (this.controls.canJump === true) this.playerVelocity.y += 300;
-    //       this.controls.canJump = false;
-    //     },
-    //     'left': () => {
-    //       console.log('left');
-    //       this.controls.moveLeft = true;
-    //     },
-    //     'right': () => {
-    //       console.log('right');
-    //       this.controls.moveRight = true;
-    //     },
-    //     'top': () => {
-    //       console.log('top');
-    //       this.controls.moveForward = true;
-    //     },
-    //     'bot': () => {
-    //       console.log('bot');
-    //       this.controls.moveBackward = true;
-    //     },
-    //     'q': () => {
-    //       console.log('stop');
-    //       this.controls.moveForward = false;
-    //       this.controls.moveLeft = false;
-    //       this.controls.moveBackward = false;
-    //       this.controls.moveRight = false;
-    //     }
-    //   };
-    //
-    //   // Add our commands to annyang
-    //   annyang.addCommands(commands);
-    //
-    //   // Start listening.
-    //   annyang.start();
-    // } else {
-    //   alert('error');
-    // }
-
     let onKeyDown = (event: any) => {
 
       switch (event.keyCode) {
@@ -302,6 +192,5 @@ export class Player implements IPlayer {
       this.controls.canJump = true;
     }
   };
-
 
 }
